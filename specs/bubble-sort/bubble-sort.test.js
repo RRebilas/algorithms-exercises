@@ -10,13 +10,26 @@
   index's. Continue looping through until all values are in ascending order
 */
 
-function bubbleSort(nums) {
-  // code goes here
+export function bubbleSort(nums) {
+  let alreadySorted = 0;
+  do {
+    alreadySorted++;
+    anySwap = false;
+    for (let j = 0; j < nums.length - alreadySorted; j++) {
+      if (nums[j] > nums[j + 1]) {
+        const deleted = nums.splice(j, 2);
+        nums.splice(j, 0, ...deleted.reverse());
+        anySwap = true;
+      }
+    }
+  } while (anySwap);
+
+  return nums;
 }
 
 // unit tests
 // do not modify the below code
-test.skip("bubble sort", function () {
+test("bubble sort", function () {
   const nums = [10, 5, 3, 8, 2, 6, 4, 7, 9, 1];
   const sortedNums = bubbleSort(nums);
   expect(sortedNums).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
