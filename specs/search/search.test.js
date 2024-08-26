@@ -9,8 +9,20 @@ function linearSearch(id, array) {
 
 function binarySearch(id, array) {
   // code goes here
-}
+  let foundElement;
+  do {
+    let length = array.length;
+    if (!array.length) break;
+    let middleIndex = Math.floor(length / 2) - 1;
+    let middleElement = array[middleIndex];
 
+    if (id === middleElement.id) foundElement = middleElement;
+    if (id < middleElement.id) array = array.slice(0, middleIndex);
+    if (id > middleElement.id) array = array.slice(middleIndex + 1);
+  } while (!foundElement);
+
+  return foundElement;
+}
 // unit tests
 // do not modify the below code
 test.skip("linear search", function () {
@@ -30,12 +42,12 @@ test.skip("linear search", function () {
       { id: 2, name: "Marc" },
       { id: 51, name: "Chris" },
       lookingFor,
-      { id: 14, name: "Ben" }
+      { id: 14, name: "Ben" },
     ])
   ).toBe(lookingFor);
 });
 
-test.skip("binary search", function () {
+test("binary search", function () {
   const lookingFor = { id: 23, name: "Brian" };
   expect(
     binarySearch(23, [
@@ -52,7 +64,7 @@ test.skip("binary search", function () {
       { id: 19, name: "Marc" },
       { id: 21, name: "Chris" },
       lookingFor,
-      { id: 24, name: "Ben" }
+      { id: 24, name: "Ben" },
     ])
   ).toBe(lookingFor);
 });

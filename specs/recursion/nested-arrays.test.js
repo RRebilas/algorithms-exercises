@@ -9,9 +9,7 @@
  
  */
 
-function nestedAdd(array) {
-  // write code here
-}
+function nestedAdd(array) {}
 
 test.skip("nested arrays addition", () => {
   expect(nestedAdd([1, 2, 3])).toEqual(6);

@@ -7,8 +7,35 @@
 */
 
 const mergeSort = (nums) => {
-  // code goes here
+  if (nums.length <= 1) return nums;
+
+  const length = nums.length;
+  const middleIndex = Math.ceil(length / 2);
+  const left = nums.splice(0, middleIndex);
+
+  return merge(mergeSort(left), mergeSort(nums));
 };
+
+const merge = (left, right) => {
+  const results = [];
+
+  // go until one list runs outs
+  while (left.length && right.length) {
+    if (left[0] <= right[0]) {
+      // shift removes the first element in an array and returns it
+      // it's like .pop() for the front
+      results.push(left.shift());
+    } else {
+      results.push(right.shift());
+    }
+  }
+
+  // either left or right will be empty so you can safely concat both
+  return results.concat(left, right);
+};
+
+const nums = [10, 5, 3, 8, 2, 6, 4, 7, 9, 1];
+mergeSort(nums);
 
 // unit tests
 // do not modify the below code
